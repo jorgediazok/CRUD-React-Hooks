@@ -4,8 +4,9 @@ import { useForm } from 'react-hook-form';
 const AddUserForm = (props) => {
   const { register, errors, handleSubmit } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = (data, e) => {
+    props.addUser(data);
+    e.target.reset();
   };
 
   return (
@@ -18,7 +19,7 @@ const AddUserForm = (props) => {
           required: { value: true, message: 'Name is Required' },
         })}
       />
-      <div>{errors?.name?.message}</div>
+      <div style={{ color: 'red' }}>{errors?.name?.message}</div>
       <label>Username</label>
       <input
         type="text"
@@ -27,7 +28,7 @@ const AddUserForm = (props) => {
           required: { value: true, message: 'Username is Required' },
         })}
       />
-      <div>{errors?.username?.message}</div>
+      <div style={{ color: 'red' }}>{errors?.username?.message}</div>
       <button>Add New User</button>
     </form>
   );
